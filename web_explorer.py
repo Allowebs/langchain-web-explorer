@@ -2,17 +2,12 @@ import streamlit as st
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.retrievers.web_research import WebResearchRetriever
-import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Now, access your variables as before
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
-os.environ["GOOGLE_CSE_ID"] = os.getenv("GOOGLE_CSE_ID")
-os.environ["OPENAI_API_BASE"] = os.getenv("OPENAI_API_BASE")
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+# Accessing secrets
+google_api_key = st.secrets["GOOGLE_API_KEY"]
+google_cse_id = st.secrets["GOOGLE_CSE_ID"]
+openai_api_base = st.secrets["OPENAI_API_BASE"]
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 st.set_page_config(page_title="HelpIT Explorer", page_icon="🌐")
 
