@@ -14,7 +14,7 @@ os.environ["GOOGLE_CSE_ID"] = os.getenv("GOOGLE_CSE_ID")
 os.environ["OPENAI_API_BASE"] = os.getenv("OPENAI_API_BASE")
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-st.set_page_config(page_title="Interweb Explorer", page_icon="🌐")
+st.set_page_config(page_title="HelpIT Explorer", page_icon="🌐")
 
 def settings():
 
@@ -72,9 +72,8 @@ class PrintRetrievalHandler(BaseCallbackHandler):
 
 
 st.sidebar.image("img/ai.png")
-st.header("`Interweb Explorer`")
-st.info("`I am an AI that can answer questions by exploring, reading, and summarizing web pages."
-    "I can be configured to use different modes: public API or private (no data sharing).`")
+st.header("`HelpIT Explorer`")
+st.info("`Je suis une IA capable de répondre aux questions en explorant, en lisant le web`")
 
 # Make retriever and llm
 if 'retriever' not in st.session_state:
@@ -83,7 +82,7 @@ web_retriever = st.session_state.retriever
 llm = st.session_state.llm
 
 # User input 
-question = st.text_input("`Ask a question:`")
+question = st.text_input("`poser moi une question:`")
 
 if question:
 
@@ -96,7 +95,7 @@ if question:
     # Write answer and sources
     retrieval_streamer_cb = PrintRetrievalHandler(st.container())
     answer = st.empty()
-    stream_handler = StreamHandler(answer, initial_text="`Answer:`\n\n")
+    stream_handler = StreamHandler(answer, initial_text="`Réponse:`\n\n")
     result = qa_chain({"question": question},callbacks=[retrieval_streamer_cb, stream_handler])
-    answer.info('`Answer:`\n\n' + result['answer'])
+    answer.info('`Réponse:`\n\n' + result['answer'])
     st.info('`Sources:`\n\n' + result['sources'])
